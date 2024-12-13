@@ -56,3 +56,21 @@ services:
 volumes:
   db_data:
 
+.envに61〜74を打ちます
+
+APP_NAME=Laravel
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_URL=http://localhost:8000
+
+LOG_CHANNEL=stack
+
+DB_CONNECTION=mysql
+DB_HOST=db
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=laravel
+DB_PASSWORD=secret
+
+docker-compose up -d --build　をターミナルで打ちます。
