@@ -9,7 +9,7 @@ DB_HOST=db
 DB_PORT=3306
 DB_DATABASE=blog-app
 DB_USERNAME=laravel
-DB_PASSWORD=secret
+DB_PASSWORD=password
 
 docker-compose up -d --build　をターミナルで打ちます。
 
