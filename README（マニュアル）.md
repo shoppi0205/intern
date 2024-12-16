@@ -1,5 +1,5 @@
 Docker環境構築
-/.env.exampleを.envに変更します。
+.env.exampleを.envに変更します。
 5と7〜12を変更します。
 
 APP_URL=http://localhost:8000
