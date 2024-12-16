@@ -1,13 +1,8 @@
 Docker環境構築
-.envに61〜74を打ちます
+.env.exampleを.envに変更します。
+5と7〜12を変更します。
 
-APP_NAME=Laravel
-APP_ENV=local
-APP_KEY=
-APP_DEBUG=true
 APP_URL=http://localhost:8000
-
-LOG_CHANNEL=stack
 
 DB_CONNECTION=mysql
 DB_HOST=db
