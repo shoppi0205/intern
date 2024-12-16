@@ -1,7 +1,7 @@
 Docker環境構築
 
 Dockerfileを作成して、4〜20をDockerfile内に記載
-* ベースイメージ　*
+** ベースイメージ　**
 FROM php:8.2-fpm
 
 # 必要なパッケージのインストール
