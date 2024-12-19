@@ -112,6 +112,7 @@ docker exec -it blog-app bash
 
 ```bash
 docker run --rm -v $(pwd):/var/www/html -w /var/www/html composer install
+#↑これをやるとappが起動できる
 docker-compose down
 docker-compose up --build -d
 docker exec -it blog-app bash
