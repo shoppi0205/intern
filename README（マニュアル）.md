@@ -1,5 +1,10 @@
-.envを作成して以下をコピーして.envの中に貼り付ける
+# セットアップ手順
 
+## .envの設定
+
+以下をコピーして`.env`ファイルに貼り付けてください。
+
+```env
 APP_NAME=Laravel
 APP_ENV=local
 APP_KEY=
@@ -59,70 +64,96 @@ VITE_PUSHER_HOST="${PUSHER_HOST}"
 VITE_PUSHER_PORT="${PUSHER_PORT}"
 VITE_PUSHER_SCHEME="${PUSHER_SCHEME}"
 VITE_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+```
 
-ーーーーーーーーーー
+次に、以下の内容に変更してください。
 
-.env
-
+```env
 DB_CONNECTION=mysql
 DB_HOST=db
 DB_PORT=3306
 DB_DATABASE=blog-app
 DB_USERNAME=laravel
+```
 
-に変更する
+## Mailtrapの設定
 
-ーーーーーーーーーー
+1. [Mailtrap](https://mailtrap.io/)に登録します。
+2. ログイン後、左側のナビゲーションから「Email Testing」をクリックします。
+3. 右側の「Add Inbox」をクリックします。
+4. 名前を入力（任意）して「Save」を押します。
 
-https://mailtrap.io/ に登録する
-ログインしたら左のナビゲーションの「Email Testing」を押す
-右側にある「Add Inbox」を押す
-「In box」の中に名前を入れる（何でも大丈夫です）
-名前を入れたら「Save」を押す
+.envファイルを以下の内容に変更します。
 
-.env
-
+```env
 MAIL_MAILER=smtp
 MAIL_HOST=sandbox.smtp.mailtrap.io
 MAIL_PORT=2525
-MAIL_USERNAME=
-MAIL_PASSWORD=
+MAIL_USERNAME=あなたのMailtrapのユーザー名
+MAIL_PASSWORD=あなたのMailtrapのパスワード
 MAIL_ENCRYPTION=tls
-MAIL_FROM_ADDRESS=“自分のメールアドレス”
+MAIL_FROM_ADDRESS="自分のメールアドレス"
 MAIL_FROM_NAME="${APP_NAME}"
+```
 
-MAIL_USERNAMEとMAIL_PASSWORDをそれぞれ mailtrapからコピーして貼り付ける
+Mailtrapで表示される`MAIL_USERNAME`と`MAIL_PASSWORD`をコピーして貼り付けてください。
 
-ーーーーーーーーーー
+## Dockerのセットアップ
 
-Dockerを開く
-VScodeでターミナルを開く
-１docker-compose up --build -d：をうつ
-２docker exec -it blog-app bash：をうつ
-エラーになったらならなかったら7に飛ぶ
-３docker run --rm -v $(pwd):/var/www/html -w /var/www/html composer install：をうつ（これをやるとappが起動できる）
-４docker-compose down：をうつ
-５docker-compose up --build -d：をうつ
-６docker exec -it blog-app bash：をうつ
-７composer install：をうつ
-８php artisan key:generate：をうつ
-９php artisan migrate：をうつ
-１０exit：をうつ
-localhost:8000が「ite manifest not found at: /var/www/html/public/build/manifest.json」なったら
-１npm install：をうつ
-２npm run build：をうつ
+1. Dockerを開き、VSCodeのターミナルを開きます。
+2. 以下のコマンドを順に実行します。
 
-ーーーーーーーーーー
+```bash
+docker-compose up --build -d
+docker exec -it blog-app bash
+```
 
-会員登録を押す
-ユーザー名、メールアドレス、パスワード、パスワード（確認用）を入力して「登録」を押す
+エラーが発生しない場合は手順7に進んでください。発生した場合は以下を実行してください。
 
-mailtrapのEmail Testingを開いて、自分が設定した名前を押すと左側の欄にメールが来ます。
-メール認証をしたらログインできます。
+```bash
+docker run --rm -v $(pwd):/var/www/html -w /var/www/html composer install
+docker-compose down
+docker-compose up --build -d
+docker exec -it blog-app bash
+```
 
-ーーーーーーーーーー
+3. 次に以下のコマンドを実行します。
 
-「新規登録」を押してタイトル、本文に入力して「投稿」を押すと投稿できます・
-「詳細」を押すと詳細を見ることができます。
-「編集」を押すとタイトル、本文を編集することができ編集するためには「更新」を押します。
-「削除」を押すとモータブルウィンドウみたいなものが出てきて最後の警告が出てきます。消したい場合は、「OK」を押して消したくない場合は「キャンセル」を押します。
+```bash
+composer install
+php artisan key:generate
+php artisan migrate
+exit
+```
+
+4. `localhost:8000`にアクセスします。
+
+もし以下のエラーが表示された場合：
+
+```
+Vite manifest not found at: /var/www/html/public/build/manifest.json
+```
+
+以下を実行してください。
+
+```bash
+npm install
+npm run build
+```
+
+## 機能確認
+
+1. サイトの「会員登録」を押します。
+2. ユーザー名、メールアドレス、パスワードを入力して「登録」を押します。
+3. Mailtrapの「Email Testing」を開き、自分が設定したInboxをクリックします。
+4. メールが届いていることを確認し、認証リンクをクリックします。
+5. ログインして動作を確認します。
+
+## 投稿機能の確認
+
+1. 「新規登録」を押します。
+2. タイトルと本文を入力して「投稿」を押します。
+3. 投稿一覧に表示されることを確認します。
+4. 「詳細」を押して投稿の詳細を確認します。
+5. 「編集」を押してタイトルや本文を編集し、「更新」を押します。
+6. 「削除」を押すとモーダルウィンドウが表示されます。「OK」を押すと削除され、「キャンセル」を押すと削除されません。
