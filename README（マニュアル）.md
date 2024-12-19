@@ -108,7 +108,7 @@ docker-compose up --build -d
 docker exec -it blog-app bash
 ```
 
-エラーが発生しない場合は手順7に進んでください。発生した場合は以下を実行してください。
+エラーが発生しない場合は手順３に進んでください。発生した場合は以下を実行してください。
 
 ```bash
 docker run --rm -v $(pwd):/var/www/html -w /var/www/html composer install
