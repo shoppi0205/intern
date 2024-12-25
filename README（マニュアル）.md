@@ -108,39 +108,19 @@ Mailtrapで表示される`MAIL_USERNAME`と`MAIL_PASSWORD`をコピーして貼
 docker-compose up --build -d
 ```
 
-エラーが発生しない場合は手順３に進んでください。発生した場合は以下を実行してください。
-
-```bash
-docker run --rm -v $(pwd):/var/www/html -w /var/www/html composer install
-#↑これをやるとappが起動できる
-docker-compose down
-docker-compose up --build -d
-docker exec -it blog-app bash
-```
-
 3. 次に以下のコマンドを実行します。
 
 ```bash
-docker exec -it blog-app bash
-composer install
-php artisan key:generate
-php artisan migrate
+docker exec -it blog-app bash -c "
+    composer install && \
+    php artisan key:generate && \
+    php artisan migrate && \
+    npm install && \
+    npm run build && \
+    php artisan config:cache && \
+    php artisan storage:link
+"
 exit
-```
-
-4. `localhost:8000`にアクセスします。
-
-もし以下のエラーが表示された場合：
-
-```
-Vite manifest not found at: /var/www/html/public/build/manifest.json
-```
-
-以下を実行してください。
-
-```bash
-npm install
-npm run build
 ```
 
 ## 機能確認
