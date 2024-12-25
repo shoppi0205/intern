@@ -120,7 +120,6 @@ docker exec -it blog-app bash -c "
     php artisan config:cache && \
     php artisan storage:link
 "
-exit
 ```
 
 ## 機能確認
