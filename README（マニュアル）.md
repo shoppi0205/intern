@@ -74,6 +74,7 @@ DB_HOST=db
 DB_PORT=3306
 DB_DATABASE=blog-app
 DB_USERNAME=laravel
+DB_PASSWORD=password
 ```
 
 ## Mailtrapの設定
