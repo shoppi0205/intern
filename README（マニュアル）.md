@@ -105,7 +105,6 @@ Mailtrapで表示される`MAIL_USERNAME`と`MAIL_PASSWORD`をコピーして貼
 
 ```bash
 docker-compose up --build -d
-docker exec -it blog-app bash
 ```
 
 エラーが発生しない場合は手順３に進んでください。発生した場合は以下を実行してください。
@@ -121,6 +120,7 @@ docker exec -it blog-app bash
 3. 次に以下のコマンドを実行します。
 
 ```bash
+docker exec -it blog-app bash
 composer install
 php artisan key:generate
 php artisan migrate
